@@ -48,7 +48,7 @@ void conflicting_options(const cxxopts::ParseResult& result, const char* opt1, c
     }
 }
 
-    Device get_selected_device(Pulseaudio& pulse, const cxxopts::ParseResult& result, const string& sink_name, const string& source_name) {
+Device get_selected_device(Pulseaudio& pulse, const cxxopts::ParseResult& result, const string& sink_name, const string& source_name) {
     Device device = pulse.get_default_sink();
     if (result.count("sink")) {
         device = pulse.get_sink(sink_name);
