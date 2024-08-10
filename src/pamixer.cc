@@ -48,7 +48,7 @@ void conflicting_options(const cxxopts::ParseResult& result, const char* opt1, c
     }
 }
 
-Device get_selected_device(Pulseaudio& pulse, const cxxopts::ParseResult& result, const string& sink_name, const string& source_name) {
+    Device get_selected_device(Pulseaudio& pulse, const cxxopts::ParseResult& result, const string& sink_name, const string& source_name) {
     Device device = pulse.get_default_sink();
     if (result.count("sink")) {
         device = pulse.get_sink(sink_name);
@@ -118,6 +118,7 @@ int main(int argc, char* argv[])
         ("list-sinks", "list the sinks")
         ("list-sources", "list the sources")
         ("get-default-sink", "print the default sink")
+        ("set-default", "set the specified sink/source using --sink/--source as default")
         ;
 
     try
@@ -239,6 +240,10 @@ int main(int argc, char* argv[])
                 cout << sink.index << " \""
                      << sink.name << "\" \""
                      << sink.description << "\"\n";
+            }
+            if (result.count("set-default")) {
+                pulse.set_default(device);
+                device = get_selected_device(pulse, result, sink_name, source_name);
             }
         }
 
