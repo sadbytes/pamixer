@@ -36,6 +36,14 @@ void source_list_cb(pa_context * UNUSED(c), const pa_source_info *i, int eol, vo
     sources->push_back(s);
 }
 
+void stream_list_cb(pa_context * UNUSED(c), const pa_sink_input_info *i, int eol, void *raw) {
+    if (eol != 0) return;
+
+    std::list<Device>* streams = (std::list<Device>*) raw;
+    Device s(i);
+    streams->push_back(s);
+}
+
 void server_info_cb(pa_context* UNUSED(context), const pa_server_info* i, void* raw) {
     ServerInfo* info = (ServerInfo*) raw;
     info->default_sink_name = i->default_sink_name;

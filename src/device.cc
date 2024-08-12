@@ -52,6 +52,15 @@ Device::Device(const pa_sink_info* info) {
     setVolume(&(info->volume));
 }
 
+Device::Device(const pa_sink_input_info* info) {
+    type            = STREAM;
+    index           = info->index;
+    name            = info->name;
+    description     = "N/A";
+    mute            = info->mute == 1;
+    state           = DEVICE_INVALID_STATE;
+    setVolume(&(info->volume));
+}
 
 void
 Device::setVolume(const pa_cvolume* v) {

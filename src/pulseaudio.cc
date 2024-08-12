@@ -170,3 +170,13 @@ Pulseaudio::set_mute(Device& device, bool mute) {
     iterate(op);
     pa_operation_unref(op);
 }
+
+std::list<Device>
+Pulseaudio::get_streams() {
+    std::list<Device> streams;
+    pa_operation* op = pa_context_get_sink_input_info_list(context, &stream_list_cb, &streams);
+    iterate(op);
+    pa_operation_unref(op);
+
+    return streams;
+}

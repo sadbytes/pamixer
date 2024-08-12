@@ -118,6 +118,7 @@ int main(int argc, char* argv[])
         ("list-sinks", "list the sinks")
         ("list-sources", "list the sources")
         ("get-default-sink", "print the default sink")
+        ("list-streams", "list the streams")
         ;
 
     try
@@ -239,6 +240,13 @@ int main(int argc, char* argv[])
                 cout << sink.index << " \""
                      << sink.name << "\" \""
                      << sink.description << "\"\n";
+            }
+            if (result.count("list-streams")) {
+                cout << "Streams:\n";
+                for (const Device& streams : pulse.get_streams()) {
+                    cout << streams.index << " \""
+                         << streams.name << "\"\n";
+                }
             }
         }
 

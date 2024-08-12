@@ -25,7 +25,8 @@
 
 enum device_type {
     SOURCE,
-    SINK
+    SINK,
+    STREAM
 };
 typedef enum device_type device_type_t;
 
@@ -57,6 +58,7 @@ public:
 
     Device(const pa_source_info* i);
     Device(const pa_sink_info* i);
+    Device(const pa_sink_input_info* i);
 
 private:
     void setVolume(const pa_cvolume* v);

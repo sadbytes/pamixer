@@ -127,6 +127,11 @@ public:
      * @param mute
      */
     void set_mute(Device& device, bool mute);
+
+    /**
+     * @return list of the available streams
+     */
+    std::list<Device> get_streams();
 };
 
 #endif
